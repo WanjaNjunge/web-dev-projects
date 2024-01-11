@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
@@ -10,19 +10,12 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(500);
-  const [index, setIndex] = useState(1);
-  const toRotate = [ "QA Engineer", "Web Developer" ];
+
+  const toRotate = useMemo(() => ["QA Engineer", "Web Developer"], []);
+
   const period = 250;
 
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => { clearInterval(ticker) };
-  }, [text])
-
-  const tick = () => {
+  const tick = useCallback(() => {
     let i = loopNum % toRotate.length;
     let fullText = toRotate[i];
     let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
@@ -35,17 +28,21 @@ export const Banner = () => {
 
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
-      setIndex(prevIndex => prevIndex - 1);
       setDelta(period);
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setIndex(1);
       setDelta(500);
-    } else {
-      setIndex(prevIndex => prevIndex + 1);
     }
-  }
+  }, [loopNum, toRotate, isDeleting, text]);
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, delta);
+
+    return () => { clearInterval(ticker) };
+  }, [text, delta, tick]);
 
   return (
     <section className="banner" id="home">
@@ -54,12 +51,12 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Hey There!</span>
-                <h1>{`I'm Wanja, a `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "QA Engineer", "Web Developer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>A curious problem solver who loves both the precision of QA engineering and the creative freedom of web development. Combining these skills allows me to build exceptional digital experiences while ensuring their flawless functionality.</p>
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <span className="tagline">Hey There!</span>
+                  <h1>{`I'm Wanja Njung'e, a `} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "QA Engineer", "Web Developer" ]'><span className="wrap">{text}</span></span></h1>
+                  <p>A curious problem solver who loves both the precision of QA engineering and the creative freedom of web development. Combining these skills allows me to build exceptional digital experiences while ensuring flawless functionality.</p>
                   <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
-              </div>}
+                </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
