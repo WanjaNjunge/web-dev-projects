@@ -33,23 +33,39 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Skills</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem Ipsum has been the industry's standard dummy text.</p>
+                        <p>I am skilled in both React and Rails for web development.<br></br> As a QA, I create comprehensive testing strategies, test automation scripts, and conduct API testing, ensuring software excellence. With proficiency in JavaScript, Cypress and Selenium, I am able to achieve high test automation coverage. </p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
                                 <img src={meter1} alt="progress" />
-                                <h5>Web Development</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter2} alt="progress" />
-                                <h5>Brand Identity</h5>
+                                <h5>Test Automation</h5>
                             </div>
                             <div className="item">
                                 <img src={meter3} alt="progress" />
-                                <h5>Logo Design</h5>
+                                <h5>Manual Testing</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter2} alt="progress" />
+                                <h5>CI/CD</h5>
                             </div>
                             <div className="item">
                                 <img src={meter1} alt="progress" />
-                                <h5>Web Development</h5>
+                                <h5>API Testing</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter2} alt="progress" />
+                                <h5>Database Management</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter1} alt="progress" />
+                                <h5>Web Accessibility</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter2} alt="progress" />
+                                <h5>Version Control</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter1} alt="progress" />
+                                <h5>Test Documentation</h5>
                             </div>
                         </Carousel>
                     </div>
